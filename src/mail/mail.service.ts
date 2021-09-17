@@ -47,9 +47,11 @@ export class MailService {
       subject,
     };
 
-    // add uuid to mailgun custom variables
-    data['v:uuid'] = payload['uuid'];
-    data['v:template'] = payload['template'];
+    // send specified variables to mailgun (as custom variables)
+    if (process.env.MAILGUN_VARIABLES && process.env.MAILGUN_VARIABLES != 'false') {
+      const vars = process.env.MAILGUN_VARIABLES.split(',');
+      vars.forEach(v => data['v:' + v] = payload[v]);
+    }
 
     if (payload['template'] && payload['fields']) {
       this.logger.debug({ template: payload['template'], fields: payload['fields'] });
