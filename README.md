@@ -154,5 +154,3 @@ HTML-based template
 </body>
 </html>
 ```
-
-Mailgun specific 
