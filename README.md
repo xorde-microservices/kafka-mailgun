@@ -102,7 +102,7 @@ This microservice supports templating mechanism provided by awesome [Mustache](h
 ```json
 {
   "uuid":"8d9266f8-f812-4ab9-8656-a3bf9ad1676b",
-  "from":"no-reply@example.org",
+  "from":"Sender <no-reply@example.org>",
   "to":["recipient@example.org"],
   "subject":"Sent using kafka-mailgun",
   "template":"basic",
@@ -117,11 +117,19 @@ This microservice supports templating mechanism provided by awesome [Mustache](h
   uuid: string;
   from: string;
   to: string | string[];
+  bcc: string;
   subject: string;
   template: string;
   fields: object;
 }
 ```
+
+`uuid` can be any string, but it is recommended to provide real UUID since it may be required in future updates.
+
+`from` can be an address, or name and address like so `Test <test@example.org>`
+
+`to` and `bcc` can be a string or array of strings; you can either provide space-separated string of addresses, or you can provide JSON array of strings. 
+Please not though, that if you specify multiple recipients in `to` message will not be delivered individually, meaning all recipients will be able to see other recipient addresses.
 
 ### Templates
 

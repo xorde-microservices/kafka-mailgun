@@ -33,7 +33,7 @@ export class MailService {
       key: process.env.MAILGUN_API_KEY,
     });
 
-    const { uuid, from, to, subject }: any = payload;
+    const { uuid, from, to, cc, bcc, subject }: any = payload;
 
     if (!uuid) {
       this.logger.error('Processing of message aborted due to empty uuid');
@@ -44,6 +44,8 @@ export class MailService {
     const data = {
       from,
       to: typeof(to) == 'string' ?  to.split(' ') : to,
+      cc: typeof(cc) == 'string' ?  cc.split(' ') : cc,
+      bcc: typeof(bcc) == 'string' ?  bcc.split(' ') : bcc,
       subject,
     };
 
