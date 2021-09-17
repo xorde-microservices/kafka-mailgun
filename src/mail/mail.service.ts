@@ -43,7 +43,7 @@ export class MailService {
 
     const data = {
       from,
-      to: to.split(' '),
+      to: typeof(to) == 'string' ?  to.split(' ') : to,
       subject,
     };
 
