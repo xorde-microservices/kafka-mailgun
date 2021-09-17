@@ -1,0 +1,14 @@
+version: '3'
+
+### build and run container with current .env bound inside of container
+### useful for development
+
+services:
+  kraken-kafka:
+    build: .
+    image: kafka-mailgun
+    volumes:
+      - type: bind
+        read_only: true
+        source: ./.env
+        target: /opt/app/.env
