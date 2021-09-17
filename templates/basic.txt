@@ -1,0 +1,21 @@
+/*
+ SPDX-FileCopyrightText: 2021 Xorde Technologies <info@xorde.co>
+ SPDX-License-Identifier: BSD-3-Clause
+ */
+// *.txt templates may have javascript-style comments.
+// they will be stripped before template processing.
+
+Hi, {{fields.name}}.
+
+You have {{fields.number}} free report remaining.
+
+This is data: {{fields.data}}
+
+Upgrade my account:
+{{fields.url}}
+
+Thanks for choosing Acme Inc.
+
+// we may also access email message fields in templates: uuid, to, from and so on.
+Unsubscribe:
+http://example.com/unsubscribe?{{uuid}}
