@@ -10,7 +10,7 @@ services:
     image: kafka-mailgun
     environment:
     - MAILGUN_API_KEY="${MAILGUN_API_KEY}"
-    - MAILGUN_DOMAIN="${mail.xorde.co}"
+    - MAILGUN_DOMAIN="${MAILGUN_DOMAIN}"
     - MAILGUN_VARIABLES="${MAILGUN_VARIABLES}"
     - CONFLUENT_ENABLE="${CONFLUENT_ENABLE}"
     - CONFLUENT_BOOTSTRAP="${CONFLUENT_BOOTSTRAP}"
