@@ -12,7 +12,7 @@ import * as fs from 'fs';
 
 @Injectable()
 export class MailgunService {
-  private readonly logger = new Logger(MailgunService.name);
+  private readonly logger = new Logger(this.constructor.name);
   private readonly templateDir: string;
 
   @Client(KafkaConfig)
