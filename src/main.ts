@@ -22,11 +22,11 @@ if (
 }
 
 import { NestFactory } from '@nestjs/core';
-import { MailModule } from './mail/mail.module';
-import { KafkaConfig } from './config';
+import { MailgunModule } from './mailgun/mailgun.module';
+import { KafkaConfig } from './kafka.config';
 
 async function bootstrap() {
-  const app = await NestFactory.create(MailModule, {
+  const app = await NestFactory.create(MailgunModule, {
     logger:
       process.env.NODE_ENV === 'development'
         ? ['log', 'debug', 'error', 'verbose', 'warn']

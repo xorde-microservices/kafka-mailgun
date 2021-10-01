@@ -5,14 +5,14 @@
 
 import { Injectable, Logger } from '@nestjs/common';
 import { Client, ClientKafka } from '@nestjs/microservices';
-import { KafkaConfig } from '../config';
+import { KafkaConfig } from '../kafka.config';
 import * as Mailgun from 'mailgun.js';
 import * as Mustache from 'mustache';
 import * as fs from 'fs';
 
 @Injectable()
-export class MailService {
-  private readonly logger = new Logger(MailService.name);
+export class MailgunService {
+  private readonly logger = new Logger(MailgunService.name);
   private readonly templateDir: string;
 
   @Client(KafkaConfig)

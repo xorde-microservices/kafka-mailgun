@@ -1,10 +1,10 @@
 import { Controller } from '@nestjs/common';
-import { MailService } from './mail.service';
+import { MailgunService } from './mailgun.service';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 
 @Controller()
-export class MailController {
-  constructor(private readonly mailService: MailService) {}
+export class MailgunController {
+  constructor(private readonly mailService: MailgunService) {}
 
   // method receives incoming Kafka messages and processes it
   @MessagePattern(process.env.KAFKA_TOPIC || 'kafka-mailgun')
