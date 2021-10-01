@@ -112,7 +112,43 @@ Please refer to [Kafka intro](https://kafka.apache.org/intro) for more info.
 You need to send valid JSON formatted payload in order to send messages.
 Messages are always sent in two forms: plaintext and html.
 
-### Payload
+### Special payload fields
+
+`uuid` can be any string, but it is recommended to provide real UUID since it may be required in future updates.
+
+`from` can be an address, or name and address like so `Test <test@example.org>`
+
+`to` and `bcc` can be a string or array of strings; you can either provide space-separated string of addresses, or you can provide JSON array of strings.
+Please note though, that if you specify multiple recipients in `to` message **will not be delivered individually**, meaning all recipients will be able to see other recipient addresses.
+
+### Simple message
+
+#### Example
+
+```json
+{
+  "uuid":"8d9266f8-f812-4ab9-8656-a3bf9ad1676b",
+  "from":"Sender <no-reply@example.org>",
+  "to":["recipient@example.org"],
+  "subject":"Sent using kafka-mailgun",
+  "body":"Message text"
+}
+```
+
+#### Schema
+
+```
+{
+  uuid: string;
+  from: string;
+  to: string | string[];
+  bcc: string;
+  subject: string;
+  body: string;
+}
+```
+
+### Template support
 
 This microservice supports templating mechanism provided by awesome [Mustache](https://www.npmjs.com/package/mustache) library.
 
@@ -142,13 +178,6 @@ This microservice supports templating mechanism provided by awesome [Mustache](h
   fields: object;
 }
 ```
-
-`uuid` can be any string, but it is recommended to provide real UUID since it may be required in future updates.
-
-`from` can be an address, or name and address like so `Test <test@example.org>`
-
-`to` and `bcc` can be a string or array of strings; you can either provide space-separated string of addresses, or you can provide JSON array of strings. 
-Please not though, that if you specify multiple recipients in `to` message will not be delivered individually, meaning all recipients will be able to see other recipient addresses.
 
 ### Templates
 
