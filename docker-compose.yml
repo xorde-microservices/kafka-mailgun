@@ -1,14 +1,24 @@
-version: '3'
+# to deploy using .env variables please use:
+# export $(cat .env | xargs); docker-compose up -d
+# or replace all ${...} variables with real values
 
-### build and run container with current .env bound inside of container
-### useful for development
+version: '3'
 
 services:
   kraken-kafka:
     build: .
     image: kafka-mailgun
-    volumes:
-      - type: bind
-        read_only: true
-        source: ./.env
-        target: /opt/app/.env
+    environment:
+    - MAILGUN_API_KEY="${MAILGUN_API_KEY}"
+    - MAILGUN_DOMAIN="${mail.xorde.co}"
+    - MAILGUN_VARIABLES="${MAILGUN_VARIABLES}"
+    - CONFLUENT_ENABLE="${CONFLUENT_ENABLE}"
+    - CONFLUENT_BOOTSTRAP="${CONFLUENT_BOOTSTRAP}"
+    - CONFLUENT_API_KEY="${CONFLUENT_API_KEY}"
+    - CONFLUENT_API_SECRET="${CONFLUENT_API_SECRET}"
+    - KAFKA_BROKER="${KAFKA_BROKER}"
+    - KAFKA_TOPIC="${KAFKA_TOPIC}"
+    - KAFKA_CONSUMER_GROUP_ID="${KAFKA_CONSUMER_GROUP_ID}"
+    - KAFKA_CLIENT_ID="${KAFKA_CLIENT_ID}"
+    - PORT="${PORT}"
+    - TEMPLATES_DIR="${TEMPLATES_DIR}"
