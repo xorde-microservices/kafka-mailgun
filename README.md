@@ -19,12 +19,23 @@ $ npm run start:prod
 
 ## Docker quickstart
 
-This is minimal working docker configuration:
+For sending emails out supplied Mailgun credentials will be used.
+
+Only **basic** template will be available.
+
+### 1. Download sources and Docker image build
 
 ```bash
 git clone https://github.com/xorde-microservices/kafka-mailgun
 cd kafka-mailgun
 docker build --tag kafka-mailgun .
+```
+
+### 2a. Start with Kafka broker on-premise
+
+This is minimal working docker configuration:
+
+```bash
 docker run -d --name kafka-mailgun \
   -e KAFKA_BROKER=<kafka-host:9092> \
   -e MAILGUN_API_KEY='<Your Mailgun API key>' \
@@ -32,11 +43,19 @@ docker run -d --name kafka-mailgun \
   kafka-mailgun
 ```
 
-This docker will connect to **kafka-host:9092** and subsribe to **kafka-mailgun** topic.
+This docker image will connect to **kafka-host:9092** and subsribe to **kafka-mailgun** topic.
 
-For sending emails out supplied Mailgun credentials will be used.
+### 2b. Start with Kafka running in Confluent Cloud
 
-Only **basic** template will be available.
+```bash
+docker run -d --name kafka-mailgun \
+  -e KAFKA_BROKER=<confluent-host:9092> \
+  -e MAILGUN_API_KEY='<Your Mailgun API key>' \
+  -e MAILGUN_DOMAIN='<Your Mailgun domain name>' \
+  -e CONFLUENT_API_KEY='<Your Confluent API key>' \
+  -e CONFLUENT_API_SECRET='<Your Confluent API secret>' \
+  kafka-mailgun
+```
 
 ## Docker customization
 

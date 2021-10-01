@@ -27,7 +27,10 @@ import { KafkaConfig } from './config';
 
 async function bootstrap() {
   const app = await NestFactory.create(MailModule, {
-      logger: process.env.NODE_ENV === 'development' ? ['log', 'debug', 'error', 'verbose', 'warn'] : ['log', 'error', 'warn'],
+    logger:
+      process.env.NODE_ENV === 'development'
+        ? ['log', 'debug', 'error', 'verbose', 'warn']
+        : ['log', 'error', 'warn'],
   });
   app.connectMicroservice(KafkaConfig);
 

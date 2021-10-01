@@ -1,5 +1,5 @@
 {
-  "name": "xorde-kafka-mailgun",
+  "name": "kafka-mailgun",
   "version": "1.0.4",
   "description": "Simple NestJS microservice that integrates Kafka with Mailgun ",
   "author": "Xorde Technologies",
@@ -21,7 +21,6 @@
     "@nestjs/core": "^8.0.0",
     "@nestjs/microservices": "^8.0.6",
     "@nestjs/platform-express": "^8.0.0",
-    "ajv": "^8.6.3",
     "class-validator": "^0.13.1",
     "kafkajs": "^1.15.0",
     "mailgun.js": "^2.0.6",

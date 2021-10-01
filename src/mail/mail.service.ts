@@ -8,7 +8,7 @@ import { Client, ClientKafka } from '@nestjs/microservices';
 import { KafkaConfig } from '../config';
 import * as Mailgun from 'mailgun.js';
 import * as Mustache from 'mustache';
-import * as fs from "fs";
+import * as fs from 'fs';
 
 @Injectable()
 export class MailService {
@@ -43,32 +43,49 @@ export class MailService {
 
     const data = {
       from,
-      to: typeof(to) == 'string' ?  to.split(' ') : to,
-      cc: typeof(cc) == 'string' ?  cc.split(' ') : cc,
-      bcc: typeof(bcc) == 'string' ?  bcc.split(' ') : bcc,
+      to: typeof to == 'string' ? to.split(' ') : to,
+      cc: typeof cc == 'string' ? cc.split(' ') : cc,
+      bcc: typeof bcc == 'string' ? bcc.split(' ') : bcc,
       subject,
     };
 
     // send specified variables to mailgun (as custom variables)
-    if (process.env.MAILGUN_VARIABLES && process.env.MAILGUN_VARIABLES != 'false') {
+    if (
+      process.env.MAILGUN_VARIABLES &&
+      process.env.MAILGUN_VARIABLES != 'false'
+    ) {
       const vars = process.env.MAILGUN_VARIABLES.split(',');
-      vars.forEach(v => data['v:' + v] = payload[v]);
+      vars.forEach((v) => (data['v:' + v] = payload[v]));
     }
 
     if (payload['template'] && payload['fields']) {
-      this.logger.debug({ template: payload['template'], fields: payload['fields'] });
-      const text = fs.readFileSync(`${this.templateDir}/${payload['template']}.txt`);
-      const html = fs.readFileSync(`${this.templateDir}/${payload['template']}.html`);
+      this.logger.debug({
+        template: payload['template'],
+        fields: payload['fields'],
+      });
+      const text = fs.readFileSync(
+        `${this.templateDir}/${payload['template']}.txt`,
+      );
+      const html = fs.readFileSync(
+        `${this.templateDir}/${payload['template']}.html`,
+      );
       // we will remove javascript-style comments from text template:
       const jsComments = /\/\*[\s\S]*?\*\/|\/\/.*/g;
-      data['text'] = Mustache.render(text.toString().replace(jsComments,'').trim(), payload);
+      data['text'] = Mustache.render(
+        text.toString().replace(jsComments, '').trim(),
+        payload,
+      );
       data['html'] = Mustache.render(html.toString(), payload);
     } else {
       data['text'] = payload['body'];
-      data['html'] = `<!DOCTYPE html><html lang="en"><body>${payload['body']}</body></html>`
+      data[
+        'html'
+      ] = `<!DOCTYPE html><html lang="en"><body>${payload['body']}</body></html>`;
     }
 
-    this.logger.log(`Sending email message {"uuid":"${data['v:uuid']}", "to"="${data['to']}"}`);
+    this.logger.log(
+      `Sending email message {"uuid":"${data['v:uuid']}", "to"="${data['to']}"}`,
+    );
 
     return mg.messages.create(process.env.MAILGUN_DOMAIN, data);
   }

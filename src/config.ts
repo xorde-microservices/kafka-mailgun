@@ -29,19 +29,16 @@ const plainAuthConfig: KafkaOptions = {
   transport: Transport.KAFKA,
   options: {
     client: {
-      clientId:
-          (process.env.KAFKA_CLIENT_ID  || 'default-client-id').replace(
-              '%random%',
-              Math.floor(Math.random() * 10e9).toString(),
-          ),
+      clientId: (process.env.KAFKA_CLIENT_ID || 'default-client-id').replace(
+        '%random%',
+        Math.floor(Math.random() * 10e9).toString(),
+      ),
       brokers: [process.env.KAFKA_BROKER],
     },
     consumer: {
-      groupId:
-          (process.env.KAFKA_CONSUMER_GROUP_ID || 'default-consumer-group-id').replace(
-              '%random%',
-              Math.floor(Math.random() * 10e9).toString(),
-          ),
+      groupId: (
+        process.env.KAFKA_CONSUMER_GROUP_ID || 'default-consumer-group-id'
+      ).replace('%random%', Math.floor(Math.random() * 10e9).toString()),
     },
   },
 };
