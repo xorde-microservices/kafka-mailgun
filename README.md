@@ -1,3 +1,7 @@
+# Kafka connector to Mailgun
+
+[![CI Build](https://github.com/xorde-microservices/kafka-mailgun/actions/workflows/push_main.yml/badge.svg)](https://github.com/xorde-microservices/kafka-mailgun/actions/workflows/push_main.yml)
+
 ## Installation
 
 ```bash
