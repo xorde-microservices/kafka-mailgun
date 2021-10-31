@@ -18,4 +18,4 @@ echo "Building new docker image:"
 docker-compose build
 
 echo "Deploying/redeploying services:"
-docker-compose -d --env-file .env up --force-recreate --remove-orphans
+docker-compose --env-file .env up --force-recreate --remove-orphans
