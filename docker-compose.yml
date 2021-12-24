@@ -1,11 +1,7 @@
-# to deploy using .env variables please use:
-# export $(cat .env | xargs); docker-compose up -d
-# or replace all ${...} variables with real values
-
 version: '3'
 
 services:
-  kraken-kafka:
+  kafka-mailgun:
     build: .
     image: kafka-mailgun
     environment:
