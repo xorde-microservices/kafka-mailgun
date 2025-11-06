@@ -5,7 +5,7 @@
 
 import { Injectable, Logger } from '@nestjs/common';
 import { Client, ClientKafka } from '@nestjs/microservices';
-import { KafkaConfig } from '../kafka.config';
+import { KafkaConfig } from '../../kafka.config';
 import * as Mailgun from 'mailgun.js';
 import * as Mustache from 'mustache';
 import * as fs from 'fs';

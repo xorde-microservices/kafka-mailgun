@@ -1,0 +1,6 @@
+export enum EStatusState {
+	NORMAL = 'NORMAL',
+	DEGRADED = 'DEGRADED',
+	MAINTENANCE = 'MAINTENANCE',
+	FAILING = 'FAILING',
+}
